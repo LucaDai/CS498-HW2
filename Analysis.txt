@@ -7,3 +7,15 @@ IP B list average latency: 343.54 ms
 ===== Measure Consistency =====
 Misses: 0 / 100
 
+A. Latency Analysis
+
+From the results above, Instance A (us-central1) shows significantly lower latency compared to Instance B (europe-west1). This is expected because my client machine is geographically closer to the US region. Requests sent to the European instance need to travel a longer network distance, which increases round-trip time.
+
+
+B. Consistency Analysis
+
+In the consistency experiment, no misses were observed in 100 iterations. I also swapped the roles of the instances (writing to B and immediately reading from A), and still observed 0 misses.
+
+This suggests that Firestore replication between regions is very fast under the current workload. The replication delay appears to be smaller than the network round-trip time in this experiment, so the newly written data was already visible when the second region was queried.
+
+But we know Firestore does not imply strong consistency. Firestore guarantees eventual consistency, not strict read-after-write consistency across regions. The absence of misses in this experiment only indicates that replication is fast for this scale of workload.
