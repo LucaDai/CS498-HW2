@@ -1,1 +1,16 @@
+A. Latency Measurement
+	•	Implemented two helper methods: one for /register (POST) and one for /list (GET).
+	•	Generated unique usernames using a timestamp (and loop index) to avoid duplicate writes.
+	•	Used time.perf_counter() to record the time immediately before and after each HTTP request.
+	•	Calculated end-to-end latency in milliseconds for each request.
+	•	Sent 10 requests per endpoint for both instances (us-central1 and europe-west1).
+	•	Computed the average latency using statistics.mean.
 
+
+B. Observing Eventual Consistency
+	•	Generated unique usernames using timestamp combined with loop index.
+	•	Sent a POST request to Instance A (us-central1) to register the user.
+	•	Immediately sent a GET request to Instance B (europe-west1).
+	•	Checked whether the newly registered username appeared in the returned list.
+	•	Counted how many times the username was not found.
+	•	Ran this experiment for 100 iterations to observe replication behavior.
