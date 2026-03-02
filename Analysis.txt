@@ -1,0 +1,9 @@
+Script Output:
+===== Measure Latency =====
+IP A register average latency: 75.62 ms
+IP B register average latency: 343.81 ms
+IP A list average latency: 69.11 ms
+IP B list average latency: 343.54 ms
+===== Measure Consistency =====
+Misses: 0 / 100
+
